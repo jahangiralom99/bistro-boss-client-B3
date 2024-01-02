@@ -1,4 +1,5 @@
 import OrderCard from "../../../components/OrderCard/OrderCard";
+import PropTypes from 'prop-types';
 
 const OrderTab = ({items}) => {
   return (
@@ -10,4 +11,7 @@ const OrderTab = ({items}) => {
   );
 };
 
+OrderTab.propTypes = {
+  items: PropTypes.array.isRequired,
+}
 export default OrderTab;

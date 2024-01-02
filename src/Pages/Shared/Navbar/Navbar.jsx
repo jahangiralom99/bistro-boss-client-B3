@@ -25,12 +25,22 @@ const Navbar = () => {
       </li>
       <li>
       <NavLink
-          to="/order"
+          to="/order/dessert"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active text-white" : ""
           }
         >
         Our Order
+        </NavLink>
+      </li>
+      <li>
+      <NavLink
+          to="/login"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active text-white" : ""
+          }
+        >
+        Login
         </NavLink>
       </li>
     </>

@@ -1,4 +1,6 @@
 import { Parallax } from "react-parallax";
+import PropTypes from 'prop-types';
+
 
 const Cover = ({ img, heading }) => {
   return (
@@ -25,6 +27,11 @@ const Cover = ({ img, heading }) => {
       </Parallax>
     </div>
   );
+};
+
+Cover.propTypes = {
+  img: PropTypes.node,
+  heading: PropTypes.node,
 };
 
 export default Cover;
