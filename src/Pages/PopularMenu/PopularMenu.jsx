@@ -17,7 +17,7 @@ const PopularMenu = () => {
   //     });
   // }, []);
 
-  console.log(menu);
+  // console.log(menu);
 
   return (
     <section className="mt-8 mb-8">

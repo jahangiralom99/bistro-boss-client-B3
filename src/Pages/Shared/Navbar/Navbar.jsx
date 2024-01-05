@@ -1,6 +1,26 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
+import { BsCartCheckFill } from "react-icons/bs";
+import useCart from "../../../Hooks/useCart";
+
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
+
+  const handleLogOut = async () => {
+    const toastId = toast.loading("please wait...");
+    try {
+      logOut();
+      toast.success("logged out successfully", { id: toastId });
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message, { id: toastId });
+    }
+  };
+
   const navLinks = (
     <>
       <li>
@@ -14,34 +34,47 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-      <NavLink
+        <NavLink
           to="/menu"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active text-white" : ""
           }
         >
-         Our Menu
+          Our Menu
         </NavLink>
       </li>
       <li>
-      <NavLink
+        <NavLink
           to="/order/dessert"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active text-white" : ""
           }
         >
-        Our Order
+          Our Order
         </NavLink>
       </li>
       <li>
-      <NavLink
-          to="/login"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active text-white" : ""
-          }
-        >
-        Login
+        <NavLink to='/dashBoard/cart' className="border">
+          <BsCartCheckFill></BsCartCheckFill>
+          <div className="badge badge-secondary">{cart.length}</div>
         </NavLink>
+      </li>
+      <li>
+        {user ? (
+          <button onClick={handleLogOut} className="btn btn-ghost text-white">
+            {" "}
+            LogOut
+          </button>
+        ) : (
+          <NavLink
+            to="/login"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "active text-white" : ""
+            }
+          >
+            Login
+          </NavLink>
+        )}
       </li>
     </>
   );

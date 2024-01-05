@@ -5,6 +5,9 @@ import OurMenu from "../Pages/Home/Menu/OurMenu/OurMenu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import PrivetRoute from "./PrivetRoute";
+import DashBoard from "../MainLayout/DashBoard";
+import Cart from "../Pages/Deshboard/Cart/Cart";
 
 
 const Route = createBrowserRouter([
@@ -22,7 +25,7 @@ const Route = createBrowserRouter([
             },
             {
                 path: 'order/:category',
-                element: <Order></Order>
+                element: <PrivetRoute><Order></Order></PrivetRoute>
             },
             {
                 path: 'login',
@@ -31,6 +34,16 @@ const Route = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register></Register>
+            }
+        ]
+    },
+    {
+        path: '/dashBoard',
+        element: <DashBoard></DashBoard>,
+        children: [
+            {
+                path: "cart",
+                element: <Cart></Cart>
             }
         ]
     }
