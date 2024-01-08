@@ -1,15 +1,21 @@
 import { BsEyeFill, BsEyeSlashFill, BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import sideImg from "../../assets/login/authentication2 1.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import useAxiosSe from "../../Hooks/useAxiosSe";
+import GoogleLogIn from "../Shared/GoogleLogIn/GoogleLogIn";
 
 const Register = () => {
   const [isShow, setIsShow] = useState(false);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const axios = useAxiosSe();
+
   const { createUser } = useContext(AuthContext);
   const {
     register,
@@ -18,37 +24,28 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const toastId = toast.loading('Please Wait ..........');
+    const toastId = toast.loading("Please Wait ..........");
     try {
-          const res = await createUser(data.email, data.password);
-          toast.success("User created successfully", {id : toastId});
-          console.log(res);
-        } catch (err) {
-          console.log(err);
-          toast.error(err.message, {id : toastId});
-        }
-      };
+      const res = await createUser(data.email, data.password);
+      console.log(res);
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+      }
+     await axios.post('/users', userInfo)
+        .then(res => {
+          if (res.data.insertedId) {
+            console.log(res);
+            toast.success("User created successfully", { id: toastId });
+            navigate(location.state ? location.state : "/");
+          }
+      })
       
-
-  // const handleSubmitBtn = async(e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-
-  //   const toastId = toast.loading('Please Wait ..........');
-  //   try {
-  //     const res = await createUser(email, password);
-  //     toast.success("User created successfully", {id : toastId});
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err.message, {id : toastId});
-  //   }
-
-  // };
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message, { id: toastId });
+    }
+  };
 
   return (
     <>
@@ -74,10 +71,7 @@ const Register = () => {
                 className="space-y-6 mt-12"
               >
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium "
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium ">
                     Your Name
                   </label>
                   <div className="mt-2">
@@ -137,7 +131,7 @@ const Register = () => {
                         required: true,
                         minLength: 6,
                         maxLength: 20,
-                        pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$&*])/
+                        pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$&*])/,
                       })}
                       type={isShow ? "text" : "password"}
                       autoComplete="current-password"
@@ -152,20 +146,26 @@ const Register = () => {
                         <BsEyeSlashFill className="text-xl" />
                       )}
                     </div>
-                    
                   </div>
                   {errors.password?.type === "required" && (
-                      <p className="text-red-500">password is required</p>
-                    )}
+                    <p className="text-red-500">password is required</p>
+                  )}
                   {errors.password?.type === "minLength" && (
-                      <p className="text-red-500">password must be 6 characters</p>
-                    )}
+                    <p className="text-red-500">
+                      password must be 6 characters
+                    </p>
+                  )}
                   {errors.password?.type === "maxLength" && (
-                      <p className="text-red-500">password must less then 20 characters</p>
-                    )}
+                    <p className="text-red-500">
+                      password must less then 20 characters
+                    </p>
+                  )}
                   {errors.password?.type === "pattern" && (
-                      <p className="text-red-500">password must be 1 uppercase 1 special characters & 1 lowercase</p>
-                    )}
+                    <p className="text-red-500">
+                      password must be 1 uppercase 1 special characters & 1
+                      lowercase
+                    </p>
+                  )}
 
                   <div className="text-sm">
                     <a
@@ -197,20 +197,7 @@ const Register = () => {
                 )}
               </div>
               <div className="flex justify-center mb-6">
-                <div className="text-center">
-                  <button className="btn btn-outline btn-primary">
-                    <BsGoogle className="text-red-500" />
-                    Log in with
-                    <div>
-                      <span className="text-[#008744]">G</span>
-                      <span className="text-red-500">o</span>
-                      <span className="text-[#ffa700]">o</span>
-                      <span className="text-[#008744]">g</span>
-                      <span className="text-[#009955]">l</span>
-                      <span className="">e</span>
-                    </div>
-                  </button>
-                </div>
+                <GoogleLogIn></GoogleLogIn>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import GoogleLogIn from "../Shared/GoogleLogIn/GoogleLogIn";
 
 const Login = () => {
   const captchaRef = useRef();
@@ -165,20 +166,7 @@ const Login = () => {
                 )}
               </div>
               <div className="flex justify-center mb-6">
-                <div className="text-center">
-                  <button className="btn btn-outline btn-primary">
-                    <BsGoogle className="text-red-500" />
-                    Log in with
-                    <div>
-                      <span className="text-[#008744]">G</span>
-                      <span className="text-red-500">o</span>
-                      <span className="text-[#ffa700]">o</span>
-                      <span className="text-[#008744]">g</span>
-                      <span className="text-[#009955]">l</span>
-                      <span className="">e</span>
-                    </div>
-                  </button>
-                </div>
+               <GoogleLogIn></GoogleLogIn>
               </div>
             </div>
           </div>
