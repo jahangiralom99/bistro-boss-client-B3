@@ -27,7 +27,6 @@ const Register = () => {
     const toastId = toast.loading("Please Wait ..........");
     try {
       const res = await createUser(data.email, data.password);
-      console.log(res);
       const userInfo = {
         name: data.name,
         email: data.email,
@@ -42,7 +41,6 @@ const Register = () => {
       })
       
     } catch (err) {
-      console.log(err);
       toast.error(err.message, { id: toastId });
     }
   };
