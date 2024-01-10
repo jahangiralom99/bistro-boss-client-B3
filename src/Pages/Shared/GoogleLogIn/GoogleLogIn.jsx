@@ -26,7 +26,7 @@ const GoogleLogIn = () => {
     
       })
       .catch((err) => {
-        console.log(err.message);
+console.log(err.message);
         toast.error(err.message);
       });
   };

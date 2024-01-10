@@ -46,7 +46,6 @@ const Route = createBrowserRouter([
                 path: "cart",
                 element: <Cart></Cart>
             },
-            // users all
             {
                 path: 'allUser',
                 element: <AllUsers></AllUsers>
