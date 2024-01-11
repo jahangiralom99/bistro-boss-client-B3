@@ -1,21 +1,17 @@
 import { useQuery } from "react-query";
-import useAxiosSe from "../../../Hooks/useAxiosSe";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { FaUsersLine } from "react-icons/fa6";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecret from "../../../Hooks/useAxiosSecret";
 
 const AllUsers = () => {
-  const axios = useAxiosSe();
+  const axios = useAxiosSecret();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["allUsers", axios],
     queryFn: async () => {
-      const res = await axios.get("/users", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access-token')}`
-        }
-      });
+      const res = await axios.get("/users");
       return res;
     },
   });
