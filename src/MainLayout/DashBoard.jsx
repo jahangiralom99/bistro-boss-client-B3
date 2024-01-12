@@ -1,12 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaAddressCard, FaBagShopping, FaCartPlus, FaHouse, FaMessage } from "react-icons/fa6";
 import { BsBookmarkCheckFill, BsFillWalletFill, BsList } from "react-icons/bs";
+import useAdmin from "../Hooks/useAdmin";
 
 const DashBoard = () => {
-
-  // TODO: admin users is Comings
-  const isAdmin = true;
-
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   
   return (

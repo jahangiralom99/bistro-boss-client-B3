@@ -26,7 +26,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     const toastId = toast.loading("Please Wait ..........");
     try {
-      const res = await createUser(data.email, data.password);
+       await createUser(data.email, data.password);
       const userInfo = {
         name: data.name,
         email: data.email,
