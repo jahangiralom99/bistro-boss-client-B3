@@ -39,11 +39,11 @@ const AddItems = () => {
                 timer: 1500
               });
           }
-          console.log(menuItem);
+        //   console.log(menuItem);
       }
-      console.log(res.data);
+    //   console.log(res.data);
       
-      console.log(data);
+    //   console.log(data);
   };
 
   return (
