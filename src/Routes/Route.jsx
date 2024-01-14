@@ -12,6 +12,7 @@ import AllUsers from "../Pages/Deshboard/AllUsers/AllUsers";
 import AddItems from "../Pages/Deshboard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItem from "../Pages/Deshboard/ManageItem/ManageItem";
+import UpdateItem from "../Pages/Deshboard/UpdateItem/UpdateItem";
 
 
 const Route = createBrowserRouter([
@@ -56,6 +57,11 @@ const Route = createBrowserRouter([
             {
                 path: 'manageItem',
                 element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
+            },
+            {
+                path: 'updateItem/:id',
+                element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+                loader: ({params})=> fetch (`http://localhost:3000/api/v1/menu/${params.id}`)
             },
             {
                 path: 'addItem',
