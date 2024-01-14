@@ -64,6 +64,7 @@ const Navbar = () => {
           <button onClick={handleLogOut} className="btn btn-ghost text-white">
             {" "}
             LogOut
+            {user.email}
           </button>
         ) : (
           <NavLink

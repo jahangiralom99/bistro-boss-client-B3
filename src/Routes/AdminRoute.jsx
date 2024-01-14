@@ -19,17 +19,15 @@ const AdminRoute = ({children}) => {
     }
 
 
-    if (user || isAdmin) {
-        return children;
+    // if (user || isAdmin) {
+    //     return children;
+    // }
+
+  if (!user || !isAdmin) {
+    return <Navigate state={location.pathname} to="/login"></Navigate>;
     }
 
-//   if (!user || !isAdmin) {
-//     return <Navigate state={location.pathname} to="/login"></Navigate>;
-//     }
-
-     return <Navigate state={location.pathname} to="/login"></Navigate>;
-
-
+  return children;
 };
 
 

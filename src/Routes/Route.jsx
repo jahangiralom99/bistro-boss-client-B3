@@ -9,6 +9,7 @@ import PrivetRoute from "./PrivetRoute";
 import DashBoard from "../MainLayout/DashBoard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
 import AllUsers from "../Pages/Deshboard/AllUsers/AllUsers";
+import AddItems from "../Pages/Deshboard/AddItems/AddItems";
 
 
 const Route = createBrowserRouter([
@@ -49,6 +50,10 @@ const Route = createBrowserRouter([
             {
                 path: 'allUser',
                 element: <AllUsers></AllUsers>
+            },
+            {
+                path: 'dashBoard/addItem',
+                element: <AddItems></AddItems>
             }
         ]
     }
