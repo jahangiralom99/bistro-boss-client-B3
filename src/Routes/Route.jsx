@@ -13,6 +13,7 @@ import AddItems from "../Pages/Deshboard/AddItems/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItem from "../Pages/Deshboard/ManageItem/ManageItem";
 import UpdateItem from "../Pages/Deshboard/UpdateItem/UpdateItem";
+import Payment from "../Pages/Deshboard/Payment/Payment";
 
 
 const Route = createBrowserRouter([
@@ -46,10 +47,17 @@ const Route = createBrowserRouter([
         path: '/dashBoard',
         element: <PrivetRoute><DashBoard></DashBoard></PrivetRoute>,
         children: [
+        // Normal user
             {
                 path: "cart",
                 element: <Cart></Cart>
             },
+            {
+                path: 'payment',
+                element: <Payment></Payment>,
+            },
+
+            // Admin user Route
             {
                 path: 'allUser',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
@@ -67,6 +75,7 @@ const Route = createBrowserRouter([
                 path: 'addItem',
                 element: <AdminRoute><AddItems></AddItems></AdminRoute>
             }
+            // --------------------------------------------------------
         ]
     }
 ])

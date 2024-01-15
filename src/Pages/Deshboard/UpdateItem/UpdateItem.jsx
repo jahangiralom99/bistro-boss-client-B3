@@ -32,18 +32,18 @@ const UpdateItem = () => {
               recipe: data.recipe,
               image: res.data.data.display_url
           };
-          const menuItem = await privetAxios.patch(`/${_id}`, addItem);
-          if (menuItem.data.insertedId) {
+          const menuItem = await privetAxios.patch(`menu/${_id}`, addItem);
+          if (menuItem.data.modifiedCount > 0) {
             reset()
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Your work has been saved",
+                title: "Your work has been updated",
                 showConfirmButton: false,
                 timer: 1500
               });
           }
-        //   console.log(menuItem);
+          console.log(menuItem);
       }
     //   console.log(res.data);
       

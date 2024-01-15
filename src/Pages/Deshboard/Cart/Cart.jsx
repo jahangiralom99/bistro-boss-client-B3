@@ -3,6 +3,7 @@ import useAxiosSe from "../../../Hooks/useAxiosSe";
 import useCart from "../../../Hooks/useCart";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -30,7 +31,7 @@ const Cart = () => {
       <div className="md:flex justify-around">
         <h1 className="text-2xl font-bold">Total Items : {cart.length}</h1>
         <h1 className="text-2xl font-bold">Total Price : {totalPrice}</h1>
-        <h1 className="btn btn-primary">Pay</h1>
+        {cart.length ?<Link to="/dashBoard/payment" className="btn btn-primary">Pay</Link> : <button disabled className="btn btn-primary">Pay</button>}
       </div>
       <div>
         <div className="overflow-x-auto">
