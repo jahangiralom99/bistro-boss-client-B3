@@ -6,6 +6,7 @@ import useAdmin from "../Hooks/useAdmin";
 const DashBoard = () => {
   // const isAdmin = true;
   const [isAdmin] = useAdmin();
+  console.log(isAdmin);
 
   
   return (
@@ -15,7 +16,7 @@ const DashBoard = () => {
         <p className="text-center">Restaurant</p>
         <ul className="menu p-4 space-y-2">
           {
-            isAdmin ? <>
+            !isAdmin ? <>
           <li>
             <NavLink className="border" to="/dashBoard/adminHome">
               <FaHouse />
@@ -68,13 +69,13 @@ const DashBoard = () => {
           <li>
             <NavLink className="border" to="/dashBoard/history">
               <BsFillWalletFill />
-              payment history
+              Bookings
             </NavLink>
           </li>
           <li>
-            <NavLink className="border" to="/dashBoard/booking">
+            <NavLink className="border" to="/dashBoard/paymentHistory">
               <BsBookmarkCheckFill />
-              My Booking
+              Payment History
             </NavLink>
           </li>
               </>    
