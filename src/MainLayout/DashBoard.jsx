@@ -4,7 +4,7 @@ import { BsBookmarkCheckFill, BsFillWalletFill, BsList } from "react-icons/bs";
 import useAdmin from "../Hooks/useAdmin";
 
 const DashBoard = () => {
-  // const isAdmin = true;
+  // const isAdmin = false;
   const [isAdmin] = useAdmin();
   console.log(isAdmin);
 
@@ -15,12 +15,11 @@ const DashBoard = () => {
         <h1 className="text-4xl text-center p-5">BistroBoss</h1>
         <p className="text-center">Restaurant</p>
         <ul className="menu p-4 space-y-2">
-          {
-            !isAdmin ? <>
+          { isAdmin? <div>
           <li>
             <NavLink className="border" to="/dashBoard/adminHome">
               <FaHouse />
-              Admin Home
+              Admin Home 
             </NavLink>
           </li>
           <li>
@@ -47,7 +46,7 @@ const DashBoard = () => {
               all users
             </NavLink>
           </li>
-            </> : <>
+            </div> : <div>
             <li>
             <NavLink className="border" to="/dashBoard/cart">
               <FaCartPlus></FaCartPlus>
@@ -55,7 +54,7 @@ const DashBoard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="border" to="/dashBoard/home">
+            <NavLink className="border" to="/dashBoard/userHome">
               <FaHouse />
               User Home
             </NavLink>
@@ -78,7 +77,7 @@ const DashBoard = () => {
               Payment History
             </NavLink>
           </li>
-              </>    
+              </div>    
           }
           {/* shared all Menu */}
           <div className="divider"></div>

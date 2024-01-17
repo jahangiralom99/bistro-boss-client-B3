@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { BsCartCheckFill } from "react-icons/bs";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   const handleLogOut = async () => {
     const toastId = toast.loading("please wait...");
@@ -53,6 +55,12 @@ const Navbar = () => {
           Our Order
         </NavLink>
       </li>
+      {
+        user && isAdmin && <Link className="btn btn-sm mr-3" to="/dashboard/adminHome">Admin Home</Link>
+      }
+      {
+        user && !isAdmin && <Link  className="btn btn-sm mr-3" to="/dashboard/userHome">User Home</Link>
+      }
       <li>
         <NavLink to='/dashBoard/cart' className="border">
           <BsCartCheckFill></BsCartCheckFill>

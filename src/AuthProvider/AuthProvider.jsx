@@ -46,13 +46,14 @@ const AuthProvider = ({children}) => {
                 axios.post('/create-jwt', user)
                     .then(res => {
                         if (res.data.token) {
-                        localStorage.setItem("access-token", res.data.token);
+                            localStorage.setItem("access-token", res.data.token);
+                            setLoader(false);
                     }
                 })       
             } else {
                 localStorage.removeItem("access-token");
+                setLoader(false);
             }
-            setLoader(false);
         });
         return () => {
             unSub();

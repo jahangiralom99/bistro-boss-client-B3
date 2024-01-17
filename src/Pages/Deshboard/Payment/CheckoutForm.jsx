@@ -80,7 +80,7 @@ const CheckoutForm = () => {
           transaction: paymentIntent.id,
           status : "pending"
         };
-        const res = await axios.post('/payments', payment);
+        const res = await axios.post('/orders', payment);
         console.log(res.data);
         if (res.data?.paymentResult.insertedId) {
           Swal.fire({
