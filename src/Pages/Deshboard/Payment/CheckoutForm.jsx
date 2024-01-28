@@ -15,15 +15,17 @@ const CheckoutForm = () => {
   const { user } = useAuth();
   const [transation, setTransaction] = useState("");
 
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cart?.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
     if (totalPrice > 0) {
-      axios.post("/create-payment-intent", { price: totalPrice }).then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
-   }
+      axios
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data?.clientSecret);
+          setClientSecret(res.data?.clientSecret);
+        });
+    }
   }, [axios, totalPrice]);
 
   const handleSubmit = async (e) => {
@@ -74,13 +76,13 @@ const CheckoutForm = () => {
         const payment = {
           email: user.email,
           price: totalPrice,
-          date: new Date(),  //utc date converted use moment js
-          cardIds: cart.map(item => item._id),
-          menuItemIds: cart.map(item => item.menuId),
+          date: new Date(), //utc date converted use moment js
+          cardIds: cart.map((item) => item._id),
+          menuItemIds: cart.map((item) => item.menuId),
           transaction: paymentIntent.id,
-          status : "pending"
+          status: "pending",
         };
-        const res = await axios.post('/orders', payment);
+        const res = await axios.post("/orders", payment);
         console.log(res.data);
         if (res.data?.paymentResult.insertedId) {
           Swal.fire({
@@ -88,7 +90,7 @@ const CheckoutForm = () => {
             icon: "success",
             title: "your payment was successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
           refetch();
         }
@@ -125,12 +127,12 @@ const CheckoutForm = () => {
           Pay
         </button>
         <p
-          className="
-              text-red-500"
-        >
+          className="text-red-500">
           {error}
         </p>
-        {transation && <p className="text-green-500">Transaction Id : {transation}</p>}
+        {transation && (
+          <p className="text-green-500">Transaction Id : {transation}</p>
+        )}
       </form>
     </div>
   );

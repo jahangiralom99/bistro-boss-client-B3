@@ -10,8 +10,8 @@ const DashBoard = () => {
 
   
   return (
-    <div className="flex">
-      <div className="w-64 bg-orange-400 h-screen">
+    <div className="md:flex ">
+      <div className="w-64 mx-auto bg-orange-400 h-screen">
         <h1 className="text-4xl text-center p-5">BistroBoss</h1>
         <p className="text-center">Restaurant</p>
         <ul className="menu p-4 space-y-2">

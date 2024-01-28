@@ -8,20 +8,24 @@ const useMenu = () => {
   // useEffect(() => {
   //   fetch("http://localhost:3000/api/v1/menu")
   //     .then((res) => res.json())
-  //       .then((data) => { 
+  //       .then((data) => {
   //           setMenu(data);
   //           setLoading(false);
   //     });
   // }, []);
-  
-  const {data: menu = [], isPending: loading, refetch} = useQuery({
-    queryKey: ['menu'], 
-    queryFn: async() =>{
-        const res = await axios.get('/menu');
-        return res.data;
-    }
-})
-  
+
+  const {
+    data: menu = [],
+    isPending: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ["menu"],
+    queryFn: async () => {
+      const res = await axios.get("/menu");
+      return res.data;
+    },
+  });
+
   return [menu, loading, refetch];
 };
 

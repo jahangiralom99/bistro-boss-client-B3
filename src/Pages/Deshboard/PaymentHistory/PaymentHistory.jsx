@@ -7,11 +7,11 @@ const PaymentHistory = () => {
   const { user } = useAuth();
   const axios = useAxiosSecret();
 
-  const { data: payments, isLoading } = useQuery({
+  const { data: payments=[], isLoading } = useQuery({
     queryKey: ["payments", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`/payments/${user?.email}`);
-      return res.data;
+      const res = await axios.get(`/orders/${user?.email}`);
+      return res?.data;
     },
   });
 
@@ -19,7 +19,7 @@ const PaymentHistory = () => {
     return <p>Loading ..........</p>;
   }
 
-  console.log(payments);
+  // console.log(payments);
 
   return (
     <section className="p-5">
@@ -39,7 +39,7 @@ const PaymentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {payments.map((payment, idx) => (
+            {payments?.map((payment, idx) => (
               <tr key={payment._id}>
                 <th>{idx + 1}</th>
                 <td>{payment.price} $</td>

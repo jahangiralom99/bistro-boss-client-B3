@@ -18,81 +18,109 @@ import PaymentHistory from "../Pages/Deshboard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/Deshboard/UserHome/UserHome";
 import AdminHome from "../Pages/Deshboard/AdminHome/AdminHome";
 
-
 const Route = createBrowserRouter([
-    {
-        path: "/",
-        element: <Main></Main>,
-        children: [
-            {
-                index: true,
-                element: <Home></Home>
-            },
-            {
-                path: "/menu",
-                element: <OurMenu></OurMenu>
-            },
-            {
-                path: 'order/:category',
-                element: <PrivetRoute><Order></Order></PrivetRoute>
-            },
-            {
-                path: 'login',
-                element: <Login></Login>
-            },
-            {
-                path: 'register',
-                element: <Register></Register>
-            }
-        ]
-    },
-    {
-        path: '/dashBoard',
-        element: <PrivetRoute><DashBoard></DashBoard></PrivetRoute>,
-        children: [
-            // Normal user
-            {
-                path: 'userHome',
-                element: <UserHome></UserHome>
-            },
-            {
-                path: "cart",
-                element: <Cart></Cart>
-            },
-            {
-                path: 'payment',
-                element: <Payment></Payment>,
-            },
-            {
-                path: "paymentHistory",
-                element: <PaymentHistory></PaymentHistory>,
-            },
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "/menu",
+        element: <OurMenu></OurMenu>,
+      },
+      {
+        path: "order/:category",
+        element: (
+          <PrivetRoute>
+            <Order></Order>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashBoard",
+    element: (
+      <PrivetRoute>
+        <DashBoard></DashBoard>
+      </PrivetRoute>
+    ),
+    children: [
+      // Normal user
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
 
-            // Admin user Route
-            {
-                path: "adminHome",
-                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-            },
-            {
-                path: 'allUser',
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-            },
-            {
-                path: 'manageItem',
-                element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
-            },
-            {
-                path: 'updateItem/:id',
-                element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-                loader: ({params})=> fetch (`http://localhost:3000/api/v1/menu/${params.id}`)
-            },
-            {
-                path: 'addItem',
-                element: <AdminRoute><AddItems></AddItems></AdminRoute>
-            }
-            // --------------------------------------------------------
-        ]
-    }
-])
+      // Admin user Route
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allUser",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItem",
+        element: (
+          <AdminRoute>
+            <ManageItem></ManageItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/api/v1/menu/${params.id}`),
+      },
+      {
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <AddItems></AddItems>
+          </AdminRoute>
+        ),
+      },
+      // --------------------------------------------------------
+    ],
+  },
+]);
 
 export default Route;
